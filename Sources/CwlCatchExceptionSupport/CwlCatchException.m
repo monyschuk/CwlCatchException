@@ -18,6 +18,7 @@
 //  IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 //
 
+#if !__LINUX__
 #import "CwlCatchException.h"
 
 NSException* __nullable catchExceptionOfKind(Class __nonnull type, void (^ __nonnull inBlock)(void)) {
@@ -32,3 +33,4 @@ NSException* __nullable catchExceptionOfKind(Class __nonnull type, void (^ __non
 	}
 	return nil;
 }
+#endif

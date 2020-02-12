@@ -24,6 +24,11 @@ import Foundation
 import CwlCatchExceptionSupport
 #endif
 
+#if os(Linux)
+private func catchReturnTypeConverter<T>(_ type: T.Type, block: @escaping () -> Void) -> T? {
+    block(); return nil
+}
+#else
 private func catchReturnTypeConverter<T: NSException>(_ type: T.Type, block: @escaping () -> Void) -> T? {
 	return catchExceptionOfKind(type, block) as? T
 }
@@ -33,3 +38,4 @@ extension NSException {
 		return catchReturnTypeConverter(self, block: block)
 	}
 }
+#endif
